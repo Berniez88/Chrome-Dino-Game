@@ -1,6 +1,7 @@
 import { updateGround, setupGround } from "./ground.js";
 const WORLD_WIDTH = 100;
 const WORLD_HEIGHT = 30;
+const SPEED_SCALE_INCREASE = 0.00001;
 
 const worldElement = document.querySelector("[data-world]");
 
@@ -8,10 +9,11 @@ setPixelToWorldScale();
 
 // everytime our pixel size changes we want to reupdate our world accordingly
 window.addEventListener("resize", setPixelToWorldScale);
-
-setupGround();
+// only runs once
+document.addEventListener("keydown", handleStart, { once: true });
 
 let lastTime;
+let speedScale;
 function update(time) {
   if (lastTime == null) {
     lastTime = time;
@@ -20,12 +22,23 @@ function update(time) {
   }
   const delta = time - lastTime;
 
-  updateGround(delta);
+  updateGround(delta, speedScale);
+  updateSpeedScale(delta);
+
   lastTime = time;
   window.requestAnimationFrame(update);
 }
-// this will call our update function when the content on our screen changes
-window.requestAnimationFrame(update);
+
+function updateSpeedScale(delta) {
+  speedScale += delta * SPEED_SCALE_INCREASE;
+}
+function handleStart() {
+  lastTime = null;
+  speedScale = 1;
+  setupGround();
+  // this will call our update function when the content on our screen changes
+  window.requestAnimationFrame(update);
+}
 
 function setPixelToWorldScale() {
   let worldToPixelScale;
