@@ -1,4 +1,5 @@
 import { updateGround, setupGround } from "./ground.js";
+import { updateDino, setupDino } from "./dino.js";
 const WORLD_WIDTH = 100;
 const WORLD_HEIGHT = 30;
 const SPEED_SCALE_INCREASE = 0.00001;
@@ -26,6 +27,7 @@ function update(time) {
   const delta = time - lastTime;
 
   updateGround(delta, speedScale);
+  updateDino(delta, speedScale);
   updateSpeedScale(delta);
   updateScore(delta);
 
@@ -48,6 +50,7 @@ function handleStart() {
   speedScale = 1;
   score = 0;
   setupGround();
+  setupDino();
   // this targets our startscreen element and hides it
   startScreenElem.classList.add("hide");
   // this will call our update function when the content on our screen changes
