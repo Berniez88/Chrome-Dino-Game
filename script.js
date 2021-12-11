@@ -1,4 +1,4 @@
-import { updateGround } from "./ground";
+import { updateGround, setupGround } from "./ground.js";
 const WORLD_WIDTH = 100;
 const WORLD_HEIGHT = 30;
 
@@ -8,6 +8,8 @@ setPixelToWorldScale();
 
 // everytime our pixel size changes we want to reupdate our world accordingly
 window.addEventListener("resize", setPixelToWorldScale);
+
+setupGround();
 
 let lastTime;
 function update(time) {
