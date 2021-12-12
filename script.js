@@ -16,7 +16,7 @@ setPixelToWorldScale();
 window.addEventListener("resize", setPixelToWorldScale);
 // only runs once
 document.addEventListener("keydown", handleStart, { once: true });
-
+wadaw;
 let lastTime;
 let speedScale;
 let score;
