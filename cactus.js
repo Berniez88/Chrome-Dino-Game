@@ -12,6 +12,9 @@ const worldElem = document.querySelector("[data-world]");
 let nextCactusTime;
 export function setupCactus() {
   nextCactusTime = CACTUS_INTERVAL_MIN;
+  document.querySelectorAll("[data-cactus]").forEach((cactus) => {
+    cactus.remove();
+  });
 }
 
 export function updateCactus(delta, speedScale) {
@@ -29,6 +32,13 @@ export function updateCactus(delta, speedScale) {
       speedScale;
   }
   nextCactusTime -= delta;
+}
+
+export function getCactusRects() {
+  return [...document.querySelectorAll("[data-cactus]")].map((cactus) => {
+    // returns a rectangle for every cactus on the screen
+    return cactus.getBoundingClientRect();
+  });
 }
 
 function createCactus() {
