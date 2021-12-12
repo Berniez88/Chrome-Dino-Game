@@ -1,5 +1,7 @@
 import { updateGround, setupGround } from "./ground.js";
 import { updateDino, setupDino } from "./dino.js";
+import { updateCactus, setupCactus } from "./cactus.js";
+
 const WORLD_WIDTH = 100;
 const WORLD_HEIGHT = 30;
 const SPEED_SCALE_INCREASE = 0.00001;
@@ -28,6 +30,7 @@ function update(time) {
 
   updateGround(delta, speedScale);
   updateDino(delta, speedScale);
+  updateCactus(delta, speedScale);
   updateSpeedScale(delta);
   updateScore(delta);
 
@@ -51,6 +54,7 @@ function handleStart() {
   score = 0;
   setupGround();
   setupDino();
+  setupCactus();
   // this targets our startscreen element and hides it
   startScreenElem.classList.add("hide");
   // this will call our update function when the content on our screen changes
